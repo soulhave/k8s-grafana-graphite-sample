@@ -1,1 +1,1 @@
-# k8s-graphana-graphite-sample
+# k8s-grafana-graphite-sample
