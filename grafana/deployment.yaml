@@ -14,6 +14,24 @@ spec:
       labels:
         app: grafana
     spec:
+      securityContext:
+          runAsUser: 472
+          fsGroup: 472    
       containers:
       - name: grafana
         image: grafana/grafana:latest-ubuntu
+        volumeMounts:
+          - name:  grafana-volume
+            mountPath:  /var/lib/grafana
+          #   subPath: data
+          # - name:  grafana-volume
+          #   mountPath:  /var/lib/grafana/plugins
+          #   subPath: plugins
+          # - name:  grafana-volume
+          #   mountPath:  /etc/grafana/grafana.ini
+          #   subPath: data
+      volumes:
+      - name: grafana-volume
+        gcePersistentDisk:
+          pdName: grafana-persistent-disk
+          fsType: ext4
